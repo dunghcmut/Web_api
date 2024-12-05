@@ -1,6 +1,6 @@
 # Hướng dẫn triển khai ứng dụng
 
-## 9.2.1 Frontend (FE)
+## Frontend (FE)
 
 ### Môi trường yêu cầu:
 - **Node.js**: Phiên bản tương thích với project (kiểm tra trong file `package.json`).
@@ -37,7 +37,7 @@
 
 ---
 
-## 9.2.2 Backend (BE)
+## Backend (BE)
 
 ### Môi trường yêu cầu:
 - **Java 17** trở lên.
