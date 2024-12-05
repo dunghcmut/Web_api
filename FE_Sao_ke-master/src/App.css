@@ -1,0 +1,252 @@
+/* Tổng quan */
+*{
+    user-select: none;
+}
+.App {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    padding: 0px 10px 10px 15px;
+    color: #212529;
+}
+
+/* Tiêu đề */
+.App h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: #343a40;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Khu vực chọn loại tìm kiếm */
+.App .search-options {
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.App .search-options button {
+    padding: 11px 23px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 13px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3);
+}
+
+.App .search-options button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+/* Khu vực nhập tìm kiếm */
+.App .search-input {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.App .search-input input {
+    padding: 10px 15px;
+    width: 250px;
+    border: 1px solid #ced4da;
+    border-radius: 25px;
+    font-size: 14px;
+    transition: border 0.3s ease;
+}
+
+.search-input input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.search-input button {
+    padding: 11px 16px;
+    border: none;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.search-input button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+}
+.App .results h2 {
+    font-size: 2.5rem;
+    color: #343a40;
+    font-weight:500;
+    text-transform: uppercase;
+}
+/* Bảng kết quả */
+.App .results {
+    margin-top: 20px;
+}
+
+.results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.results th,
+.results td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: left;
+    font-size: 13.7px;
+    color: #495057;
+}
+
+.results th {
+    background-color: #007bff;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.results td {
+    background-color: #ffffff;
+}
+
+.results .error-message {
+    color: #dc3545;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Highlight từ tìm kiếm */
+.highlight {
+    background-color: #ffff99;
+    font-weight: bold;
+    padding: 1px 2px;
+    border-radius: 5px;
+    color: #d9534f;
+}
+
+/* Phân trang */
+.custom-pagination {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-size: 16px;
+    width: 100%;
+    position: fixed; /* Fix the pagination to the bottom */
+    bottom: 0; /* Align it to the bottom */
+    left: 0; /* Align it to the left */
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+/* Nút phân trang */
+.custom-pagination .page-nav-button:nth-child(1){
+    margin-right: 8px;
+}
+.custom-pagination .page-nav-button:nth-child(5){
+    margin-left: 8px;
+}
+.custom-pagination .page-nav-button,
+.custom-pagination .page-button {
+    padding: 8px 15px;
+    font-size: 14px;
+    border: 1px solid #ced4da;
+    background-color: #ffffff;
+    color: #007bff;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 40px; 
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
+    transform: translateY(-15px); 
+}
+
+/* Hover cho các nút */
+.custom-pagination .page-nav-button:hover,
+.custom-pagination .page-button:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Nút trang hiện tại */
+.custom-pagination .page-button.active {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+    font-weight: bold;
+}
+
+/* Nút bị vô hiệu hóa */
+.custom-pagination .page-nav-button:disabled,
+.custom-pagination .page-button:disabled {
+    background-color: #e9ecef;
+    color: #adb5bd;
+    cursor: not-allowed;
+}
+
+/* Đảm bảo khoảng cách giữa các nút phân trang */
+.custom-pagination .page-item {
+    list-style: none;
+    margin: 0 7px;
+}
+
+/* Cải thiện khả năng hiển thị cho các số trang dài */
+.custom-pagination .page-button {
+    white-space: nowrap;
+    padding: 12px 25px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Thông tin chi tiết phân trang */
+.pagination-details {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #6c757d;
+}
+
+/* Đảm bảo số trang được hiển thị đầy đủ khi có nhiều trang */
+.custom-pagination .page-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+/* Responsive cho thiết bị di động */
+@media (max-width: 768px) {
+    /* Điều chỉnh nút phân trang cho thiết bị di động */
+    .custom-pagination .page-nav-button,
+    .custom-pagination .page-button {
+        padding: 8px 15px; /* Smaller padding for mobile */
+        font-size: 12px; /* Smaller font size for mobile */
+    }
+
+    .custom-pagination .page-item {
+        margin: 0 5px;
+    }
+
+    .search-input input {
+        width: 200px;
+    }
+}
