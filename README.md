@@ -9,7 +9,7 @@
 1. **Clone mã nguồn**:
    - Clone mã nguồn frontend từ repository bằng cách sử dụng lệnh:
      ```bash
-     git clone <link_to_frontend_repository>
+     git clone https://github.com/dunghcmut/Web_api.git
      ```
 
 2. **Cài đặt dependencies**:
@@ -33,7 +33,7 @@
      npm start
      ```
 
-   - Ứng dụng sẽ được chạy trên `http://localhost:3000` (hoặc cổng khác nếu có cấu hình khác).
+   - Ứng dụng sẽ được chạy trên `http://localhost:3000`
 
 ---
 
@@ -43,13 +43,6 @@
 - **Java 17** trở lên.
 
 ### Các bước triển khai:
-1. **Clone mã nguồn**:
-   - Clone mã nguồn backend từ repository bằng cách sử dụng lệnh:
-     ```bash
-     git clone https://github.com/dunghcmut/Web_api.git
-     ```
-
-2. **Chạy ứng dụng**:
    - Di chuyển vào thư mục BE_sao_ke chạy file JAR bằng lệnh:
      ```bash
      java -jar '/BE_sao_ke/target/myproject-0.0.1-SNAPSHOT.jar'
