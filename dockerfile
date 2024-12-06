@@ -1,17 +1,20 @@
-# Deploy backend only
+# Use a slim version of OpenJDK 17 as the base image
 FROM openjdk:17-slim
 
 # Set the working directory in the container
 WORKDIR /Web_api/BE_sao_ke
 
-# Copy the JAR file from the local target directory to the container
+# Copy the application JAR file into the container
 COPY BE_sao_ke/target/myproject-0.0.1-SNAPSHOT.jar app.jar
 
-# Copy the CSV file to the container
+# Copy the CSV file into the container
 COPY BE_sao_ke/chuyen_khoan.csv /Web_api/BE_sao_ke/chuyen_khoan.csv
 
-# Expose port 8080
+# Copy the static resources (if needed) into the container
+COPY BE_sao_ke/src/main/resources/static /Web_api/BE_sao_ke/static
+
+# Expose the port that the application will run on
 EXPOSE 8080
 
-# Define the entry point
+# Define the command to run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
