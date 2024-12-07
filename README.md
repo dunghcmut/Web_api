@@ -9,8 +9,8 @@
 ### Bước 1: Clone repository
 Trước tiên, bạn cần clone repository về máy tính của mình:
 ```bash
-git clone https://github.com/your-repository-url.git
-cd your-repository-folder
+git clone https://github.com/dunghcmut/Web_api.git
+cd Web_api
 ```
 
 ### Bước 2: Xây dựng Docker image
