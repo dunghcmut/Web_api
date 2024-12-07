@@ -1,52 +1,62 @@
-# Hướng dẫn triển khai ứng dụng
 
-## Frontend (FE)
+### Yêu cầu
 
-### Môi trường yêu cầu:
-- **Node.js**: Phiên bản tương thích với project (kiểm tra trong file `package.json`).
+- Docker (Vui lòng cài đặt Docker nếu chưa có: [Cài đặt Docker](https://docs.docker.com/get-docker/))
+- Docker Compose (Nếu sử dụng Docker Compose)
 
-### Các bước triển khai:
-1. **Clone mã nguồn**:
-   - Clone mã nguồn frontend từ repository bằng cách sử dụng lệnh:
-     ```bash
-     git clone https://github.com/dunghcmut/Web_api.git
-     ```
+## Hướng dẫn chạy Dockerfile
 
-2. **Cài đặt dependencies**:
-   - Chạy lệnh sau để cài đặt các thư viện cần thiết:
-     ```bash
-     npm install
-     ```
+### Bước 1: Clone repository
+Trước tiên, bạn cần clone repository về máy tính của mình:
+```bash
+git clone https://github.com/your-repository-url.git
+cd your-repository-folder
+```
 
-3. **Cấu hình**:
-   - Kiểm tra và chỉnh sửa các cấu hình trong project nếu cần (ví dụ: cấu hình API endpoint hoặc môi trường).
+### Bước 2: Xây dựng Docker image
+Xây dựng Docker image từ Dockerfile bằng lệnh sau:
+```bash
+docker build -t your-image-name .
+```
+Ở đây, `your-image-name` là tên bạn muốn đặt cho image của mình.
 
-4. **Build ứng dụng**:
-   - Chạy lệnh sau để build ứng dụng:
-     ```bash
-     npm run build
-     ```
+### Bước 3: Chạy container
+Sau khi xây dựng thành công image, bạn có thể chạy container bằng lệnh:
+```bash
+docker run -d -p 8080:8080 your-image-name
+```
+Lệnh trên sẽ chạy container trong chế độ nền (`-d`) và ánh xạ cổng 8080 của container với cổng 8080 trên máy của bạn.
 
-5. **Triển khai**:
-   - Deploy ứng dụng frontend đã build lên local host bằng cách chạy lệnh:
-     ```bash
-     npm start
-     ```
+### Bước 4: Kiểm tra ứng dụng
+Mở trình duyệt và truy cập `http://localhost:8080` để kiểm tra ứng dụng đang chạy trong container.
 
-   - Ứng dụng sẽ được chạy trên `http://localhost:3000`
+## Thêm thông tin
 
----
+- Nếu bạn muốn dừng container, sử dụng lệnh:
+  ```bash
+  docker stop your-container-id
+  ```
 
-## Backend (BE)
+- Để xóa container, sử dụng:
+  ```bash
+  docker rm your-container-id
+  ```
 
-### Môi trường yêu cầu:
-- **Java 17** trở lên.
+- Để xóa image, sử dụng:
+  ```bash
+  docker rmi your-image-name
+  ```
 
-### Các bước triển khai:
-   - Di chuyển vào thư mục BE_sao_ke chạy file JAR bằng lệnh:
-     ```bash
-     java -jar '/BE_sao_ke/target/myproject-0.0.1-SNAPSHOT.jar'
-     ```
+## Các thông tin khác
 
-   - Ứng dụng backend sẽ được chạy và sẵn sàng để nhận yêu cầu từ frontend.
+- Để kiểm tra các container đang chạy:
+  ```bash
+  docker ps
+  ```
 
+- Để kiểm tra các image đã tạo:
+  ```bash
+  docker images
+  ```
+
+```
