@@ -1,5 +1,5 @@
 # Use a slim version of OpenJDK 17 as the base image
-FROM openjdk:17-slim
+FROM openjdk:17-alpine
 
 # Set the working directory in the container
 WORKDIR /Web_api/BE_sao_ke

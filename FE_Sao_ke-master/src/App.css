@@ -150,10 +150,7 @@ input::-webkit-inner-spin-button {
     gap: 15px;
     font-size: 16px;
     width: 100%;
-    position: fixed; /* Fix the pagination to the bottom */
-    bottom: 0; /* Align it to the bottom */
-    left: 0; /* Align it to the left */
-    z-index: 1000; /* Ensure it stays above other elements */
+    margin-bottom: 5px;
 }
 
 /* Nút phân trang */
@@ -176,7 +173,7 @@ input::-webkit-inner-spin-button {
     min-width: 40px; 
     text-align: center;
     box-shadow: 0 4px 6px rgba(0, 123, 255, 0.1);
-    transform: translateY(-15px); 
+    transform: translateY(10px); 
 }
 
 /* Hover cho các nút */
@@ -232,6 +229,13 @@ input::-webkit-inner-spin-button {
     gap: 10px;
     margin-top: 10px;
 }
+.pagination-info {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 14px;
+    color: #6c757d;
+  }
+  
 
 /* Responsive cho thiết bị di động */
 @media (max-width: 768px) {
@@ -250,3 +254,25 @@ input::-webkit-inner-spin-button {
         width: 200px;
     }
 }
+
+
+.export-pdf-button {
+    background-color: #4CAF50; /* Màu nền xanh lá cây */
+    color: white; /* Màu chữ trắng */
+    border: none; /* Loại bỏ viền */
+    border-radius: 5px; /* Bo tròn góc */
+    padding: 10px 20px; /* Khoảng cách bên trong nút */
+    font-size: 16px; /* Kích thước chữ */
+    font-weight: bold; /* Đậm chữ */
+    cursor: pointer; /* Con trỏ dạng bàn tay khi hover */
+    transition: all 0.3s ease; /* Hiệu ứng mượt khi hover */
+}
+  
+.export-pdf-button:hover {
+    background-color: #134d16; /* Màu nền đậm hơn khi hover */
+}
+
+.export-pdf-button:active {
+    background-color: #022203; /* Màu nền đậm nhất khi bấm */
+}
+  

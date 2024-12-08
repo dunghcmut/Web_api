@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.css";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 import {
   Pagination,
   getLastPage,
@@ -16,11 +18,10 @@ function App() {
   const [filteredResults, setFilteredResults] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const [totalRecord, setTotalRecord] = useState(1);
   const [isSearched, setIsSearched] = useState(false); // Trạng thái kiểm tra đã tìm kiếm hay chưa
   const [loading, setLoading] = useState(false); // Trạng thái kiểm tra dữ liệu đang được tải về
   const [noResults, setNoResults] = useState(false); // Trạng thái không có kết quả
-
+  
   // Hàm fetch dữ liệu
   const fetchData = useCallback(
     async (page = currentPage) => {
@@ -44,12 +45,11 @@ function App() {
             detail: fields[4].replace(/"/g, ""),
           };
         });
-
+  
         setFilteredResults(processedData);
-        setTotalRecord(result.totalRecords);
         setTotalPages(result.totalPages);
         setIsSearched(true);
-
+  
         if (processedData.length === 0) {
           setNoResults(true);
         }
@@ -59,9 +59,9 @@ function App() {
         setLoading(false);
       }
     },
-    [currentPage, searchType, searchValue]
+    [currentPage,searchType, searchValue]
   );
-
+  
 
   // Hàm xử lý sự kiện tìm kiếm
   const handleSearch = () => {
@@ -77,8 +77,8 @@ function App() {
       fetchData(pageNumber); // Gọi API với số trang
     }
   };
-
-
+  
+  
 
   // Hàm highlight văn bản
   const highlightText = (text) => {
@@ -113,6 +113,33 @@ function App() {
   useEffect(() => {
     localStorage.setItem("searchType", searchType);
   }, [searchType]);
+
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+
+    // Thêm tiêu đề
+    doc.setFontSize(16);
+    doc.text("Kết quả tìm kiếm", 14, 20);
+
+    // Thêm bảng dữ liệu
+    const tableColumn = ["Date_Time", "Trans_no", "Credit", "Debit", "Detail"];
+    const tableRows = filteredResults.map((item) => [
+      item.date_time,
+      item.trans_no,
+      item.credit,
+      item.debit,
+      item.detail,
+    ]);
+
+    doc.autoTable({
+      head: [tableColumn],
+      body: tableRows,
+      startY: 30,
+    });
+
+    // Lưu PDF
+    doc.save("ket_qua_tim_kiem.pdf");
+  };
 
   return (
     <div className="App">
@@ -190,6 +217,13 @@ function App() {
         />
         <button onClick={handleSearch}>Tìm kiếm</button>
       </div>
+      
+      {/* Nút xuất PDF */}
+        {filteredResults.length > 0 && (
+          <button onClick={exportToPDF} className="export-pdf-button">
+            Xuất PDF
+          </button>
+      )}
 
       {/* Hiển thị trạng thái tìm kiếm */}
       {loading && <p>Đang tìm kiếm...</p>}
@@ -197,11 +231,6 @@ function App() {
       {/* Kết quả tìm kiếm */}
       {isSearched && !loading && ( // Chỉ hiển thị kết quả nếu đã tìm kiếm và không còn trạng thái loading
         <div className="results">
-          <p>Tổng số kết quả: {totalRecord}. Tổng số trang: {totalPages}</p> {/* Hiển thị tổng số bản ghi */}
-          {noResults && (
-            <p className="error-message">Không tìm thấy kết quả tìm kiếm</p>
-          )}
-          <h2>Kết quả tìm kiếm:</h2>
           {noResults && (
             <p className="error-message">Không tìm thấy kết quả tìm kiếm</p>
           )}
@@ -241,27 +270,27 @@ function App() {
             >
 
               <Pagination.Controls>
-                {/* Nút chuyển về trang đầu */}
-                <button
-                  aria-label="Go to First Page"
-                  className="page-nav-button"
-                  onClick={() => handlePageChange(1)} // Đảm bảo truyền `1` để đồng nhất
-                  disabled={currentPage === 1} // Vô hiệu hóa nếu đang ở trang đầu tiên
-                >
-                  &laquo; First
-                </button>
+              {/* Nút chuyển về trang đầu */}
+              <button
+                aria-label="Go to First Page"
+                className="page-nav-button"
+                onClick={() => handlePageChange(1)} // Đảm bảo truyền `1` để đồng nhất
+                disabled={currentPage === 1} // Vô hiệu hóa nếu đang ở trang đầu tiên
+              >
+                &laquo; First
+              </button>
 
-                {/* Nút giảm trang */}
-                <button
-                  aria-label="Previous Page"
-                  className="page-nav-button"
-                  onClick={() => {
-                    if (currentPage > 1) handlePageChange(currentPage - 1);
-                  }}
-                  disabled={currentPage === 1} // Vô hiệu hóa nếu đang ở trang đầu tiên
-                >
-                  &lt;
-                </button>
+              {/* Nút giảm trang */}
+              <button
+                aria-label="Previous Page"
+                className="page-nav-button"
+                onClick={() => {
+                  if (currentPage > 1) handlePageChange(currentPage - 1);
+                }}
+                disabled={currentPage === 1} // Vô hiệu hóa nếu đang ở trang đầu tiên
+              >
+                &lt;
+              </button>
                 <Pagination.PageList fontSize="500px">
                   {({ state }) => {
                     const maxVisiblePages = 5; // Số trang hiển thị mỗi lần
@@ -280,7 +309,7 @@ function App() {
                     );
 
                     return range.map((pageNumber) => (
-
+                      
                       <Pagination.PageListItem key={pageNumber} className="page-item">
                         <Pagination.PageButton
                           aria-label={`Page ${pageNumber}`}
@@ -335,6 +364,14 @@ function App() {
           <button onClick={handleReload}>Reload trang</button>
         </div>
       )}
+      {totalPages > 1 && (
+  <div className="pagination-info">
+    <p>
+      Đang ở trang {currentPage} trên tổng số {totalPages} trang
+    </p>
+  </div>
+)}
+
     </div>
   );
 }
