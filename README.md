@@ -58,5 +58,8 @@ Mở trình duyệt và truy cập `http://localhost:8080` để kiểm tra ứn
   ```bash
   docker images
   ```
-
+- link dockerhub
+  ```bash
+  docker pull dungne/besaoke
+  ```
 ```
