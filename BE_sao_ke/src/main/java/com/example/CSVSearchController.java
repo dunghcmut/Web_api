@@ -15,7 +15,7 @@ public class CSVSearchController {
             @RequestParam String attribute,
             @RequestParam String data,
             @RequestParam(defaultValue = "0") int page,
-            @RequestParam(defaultValue = "10") int size) {
+            @RequestParam(defaultValue = "20") int size) {
         return csvSearchService.searchCSV(attribute, data, page, size);
     }
 }
