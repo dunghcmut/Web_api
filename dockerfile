@@ -1,4 +1,4 @@
-# Use a slim version of OpenJDK 17 as the base image
+# Use a alpine version of OpenJDK 17 as the base image
 FROM openjdk:17-alpine
 
 # Set the working directory in the container
